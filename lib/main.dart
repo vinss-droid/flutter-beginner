@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_beginer/pages/todo_page.dart';
+import 'package:flutter_beginer/pages/home_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+
+  // init hive
+  await Hive.initFlutter();
+
+  // open a box
+  var box = await Hive.openBox('mybox');
+
   runApp(const MyApp());
 }
 
@@ -10,9 +18,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoPage(),
+      home: HomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.yellow,
+      ),
     );
   }
 }
